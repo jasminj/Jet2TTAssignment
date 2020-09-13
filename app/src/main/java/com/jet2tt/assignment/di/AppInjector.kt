@@ -10,6 +10,7 @@ import com.jet2tt.assignment.Jet2TTApp
 import dagger.android.AndroidInjection
 import dagger.android.DaggerActivity
 import dagger.android.support.AndroidSupportInjection
+import dagger.android.support.DaggerAppCompatActivity
 
 /**
  * Helper class to automatically inject fragments if they implement [Injectable].
@@ -52,7 +53,7 @@ object AppInjector {
     }
 
     private fun handleActivity(activity: Activity) {
-        if (activity is DaggerActivity) {
+        if (activity is DaggerAppCompatActivity) {
             AndroidInjection.inject(activity)
         }
         if (activity is FragmentActivity) {
