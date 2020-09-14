@@ -8,7 +8,6 @@ import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.FragmentManager
 import com.jet2tt.assignment.Jet2TTApp
 import dagger.android.AndroidInjection
-import dagger.android.DaggerActivity
 import dagger.android.support.AndroidSupportInjection
 import dagger.android.support.DaggerAppCompatActivity
 
