@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.jet2tt.assignment.model.Article
 
-class ArticlesAdapter : PagingDataAdapter<Article, ViewHolder>(GALLERY_COMPARATOR) {
+class ArticlesAdapter : PagingDataAdapter<Article, ViewHolder>(ARTICLE_COMPARATOR) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ArticleViewHolder {
         return ArticleViewHolder.create(parent)
@@ -22,7 +22,7 @@ class ArticlesAdapter : PagingDataAdapter<Article, ViewHolder>(GALLERY_COMPARATO
     }
 
     companion object {
-        private val GALLERY_COMPARATOR = object : DiffUtil.ItemCallback<Article>() {
+        private val ARTICLE_COMPARATOR = object : DiffUtil.ItemCallback<Article>() {
             override fun areItemsTheSame(oldItem: Article, newItem: Article): Boolean =
                 oldItem.id == newItem.id
 
