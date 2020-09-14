@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">Jet2TTAssignment</string>
+
+    <string name="articles">Articles</string>
+    <string name="loading">Loading</string>
+    <string name="retry">Retry</string>
+
+    <string name="likes">%1$s Likes</string>
+    <string name="comments">%1$s Comments</string>
 </resources>
