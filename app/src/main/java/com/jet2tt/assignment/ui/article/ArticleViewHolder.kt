@@ -43,6 +43,7 @@ class ArticleViewHolder(private var binding: ItemArticleBinding) :
 
         Glide.with(binding.userImage)
             .load(user.avatar)
+            .placeholder(R.color.cardBackground)
             .into(binding.userImage)
 
         binding.userName.text = user.name

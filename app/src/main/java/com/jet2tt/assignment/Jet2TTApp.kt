@@ -1,5 +1,6 @@
 package com.jet2tt.assignment
 
+import android.content.Context
 import com.jet2tt.assignment.di.AppComponent
 import com.jet2tt.assignment.di.AppInjector
 import com.jet2tt.assignment.di.DaggerAppComponent
@@ -15,6 +16,7 @@ class Jet2TTApp : DaggerApplication() {
 
     override fun onCreate() {
         super.onCreate()
+        instance = this
 
         if (BuildConfig.DEBUG) {
             Timber.plant(Timber.DebugTree())
@@ -25,5 +27,19 @@ class Jet2TTApp : DaggerApplication() {
 
     override fun applicationInjector(): AndroidInjector<out DaggerApplication> {
         return component
+    }
+
+    fun getContext(): Context {
+        return applicationContext
+    }
+
+    companion object {
+        private var instance: Jet2TTApp? = null
+
+        @JvmName("getAppInstance")
+        @JvmStatic
+        fun getInstance(): Jet2TTApp? {
+            return instance
+        }
     }
 }

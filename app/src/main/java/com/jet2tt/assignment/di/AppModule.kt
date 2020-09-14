@@ -2,10 +2,13 @@ package com.jet2tt.assignment.di
 
 import com.google.gson.Gson
 import com.jet2tt.assignment.BuildConfig
+import com.jet2tt.assignment.Jet2TTApp
 import com.jet2tt.assignment.api.ArticleService
+import com.jet2tt.assignment.api.CacheInterceptor
 import com.jet2tt.assignment.api.ResponseHandler
 import dagger.Module
 import dagger.Provides
+import okhttp3.Cache
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -14,6 +17,10 @@ import javax.inject.Singleton
 
 @Module(includes = [ViewModelModule::class])
 class AppModule {
+
+    private val cacheSize = (5 * 1024 * 1024).toLong()
+    private val appCache =
+        Jet2TTApp.getInstance()?.getContext()?.cacheDir?.let { Cache(it, cacheSize) }
 
     @Singleton
     @Provides
@@ -24,9 +31,12 @@ class AppModule {
 
     @Provides
     fun provideOkHttpClient(
-        interceptor: HttpLoggingInterceptor
+        interceptor: HttpLoggingInterceptor,
+        cacheInterceptor: CacheInterceptor
     ): OkHttpClient =
         OkHttpClient.Builder()
+            .cache(appCache)
+            .addInterceptor(cacheInterceptor)
             .addInterceptor(interceptor)
             .build()
 
@@ -36,6 +46,9 @@ class AppModule {
             level =
                 if (BuildConfig.DEBUG) HttpLoggingInterceptor.Level.BODY else HttpLoggingInterceptor.Level.NONE
         }
+
+    @Provides
+    fun provideCacheInterceptor(): CacheInterceptor = CacheInterceptor()
 
     @Provides
     @Singleton

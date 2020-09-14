@@ -34,6 +34,7 @@ class ArticlesActivity : DaggerAppCompatActivity(), Injectable {
 
         initAdapter()
         getArticles()
+        binding.retryButton.setOnClickListener { adapter.retry() }
     }
 
     private fun initAdapter() {
